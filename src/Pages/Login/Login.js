@@ -4,7 +4,7 @@ import { AuthProvider } from "../../AuthContext/AuthContext";
 import { toast } from "react-toastify";
 const Login = () => {
   const { GithubSignIn, GoogleSignIn, SignIn, user } = useContext(AuthProvider);
-  console.log(user)
+  console.log(user);
 
   const googleSignIn = () => {
     GoogleSignIn().then((result) => {});
@@ -18,10 +18,14 @@ const Login = () => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-    SignIn(email, password).then((result) => {
-      event.target.reset();
-      toast.success(`Succesfully Sign In`);
-    });
+    SignIn(email, password)
+      .then((result) => {
+        event.target.reset();
+        toast.success(`Succesfully Sign In`);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
   return (
     <div className="w-full max-w-sm mx-auto mt-20 p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -79,7 +83,7 @@ const Login = () => {
             </label>
           </div>
           <Link
-            to="#"
+            to="/forgot-password"
             className="ml-auto text-sm text-slate-700 hover:underline dark:text-blue-500"
           >
             Lost Password?
@@ -103,7 +107,10 @@ const Login = () => {
       </form>
       <div className="divider">OR</div>
       <div className="flex items-center justify-center gap-4">
-        <button onClick={githubSignIn} className="flex items-center justify-center w-full px-4 py-2 text-sm text-white text-gray-700 border border-gray-300 rounded-lg hover:border-gray-500 focus:border-gray-500">
+        <button
+          onClick={githubSignIn}
+          className="flex items-center justify-center w-full px-4 py-2 text-sm text-white text-gray-700 border border-gray-300 rounded-lg hover:border-gray-500 focus:border-gray-500"
+        >
           <svg
             className="w-4 h-4 mr-2"
             aria-hidden="true"
@@ -114,7 +121,10 @@ const Login = () => {
           </svg>
           Github
         </button>
-        <button onClick={googleSignIn} className="flex items-center justify-center w-full px-4 py-2 text-sm text-white text-gray-700 border border-gray-300 rounded-lg hover:border-gray-500 focus:border-gray-500">
+        <button
+          onClick={googleSignIn}
+          className="flex items-center justify-center w-full px-4 py-2 text-sm text-white text-gray-700 border border-gray-300 rounded-lg hover:border-gray-500 focus:border-gray-500"
+        >
           <svg
             className="w-4 h-4 mr-2"
             viewBox="0 0 21 20"

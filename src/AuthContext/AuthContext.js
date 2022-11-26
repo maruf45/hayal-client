@@ -3,10 +3,12 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   updateProfile,
+  confirmPasswordReset,
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import { auth } from "../Firebase/firebase.config";
@@ -30,9 +32,19 @@ const AuthContext = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  const ResetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email, {
+      url: "http://localhost:3000/login",
+    });
+  };
+
+  const NewPassword = (oobCode, newpassword) => {
+    return confirmPasswordReset(auth, oobCode, newpassword);
+  };
+
   const SignOut = () => {
-    return signOut(auth)
-  }
+    return signOut(auth);
+  };
 
   const GoogleSignIn = () => {
     return signInWithPopup(auth, googleProvider);
@@ -56,6 +68,8 @@ const AuthContext = ({ children }) => {
     RegisterUser,
     UpdateProfile,
     SignIn,
+    ResetPassword,
+    NewPassword,
     SignOut,
     GoogleSignIn,
     GithubSignIn,

@@ -11,11 +11,15 @@ const Register = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    RegisterUser(email, password).then((result) => {
-      updateProfile(name);
-      toast.success(`${name} Succesfully Register`);
-      event.target.reset();
-    });
+    RegisterUser(email, password)
+      .then((result) => {
+        updateProfile(name);
+        toast.success(`${name} Succesfully Register`);
+        event.target.reset();
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   const updateProfile = (name) => {

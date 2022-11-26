@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthProvider } from "../../AuthContext/AuthContext";
 import { toast } from "react-toastify";
 
 const Register = () => {
   const { RegisterUser, UpdateProfile } = useContext(AuthProvider);
+  const navigate = useNavigate();
+  const loaction = useLocation();
+
+  const from = loaction.state?.from?.pathname || "/";
   const formSubmit = (event) => {
     event.preventDefault();
     const name = event.target.name.value;
@@ -16,6 +20,8 @@ const Register = () => {
         updateProfile(name);
         toast.success(`${name} Succesfully Register`);
         event.target.reset();
+        navigate(from, { replace: true });
+
       })
       .catch((error) => {
         toast.error(error.message);

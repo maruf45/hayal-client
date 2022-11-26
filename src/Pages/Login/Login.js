@@ -1,17 +1,24 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthProvider } from "../../AuthContext/AuthContext";
 import { toast } from "react-toastify";
 const Login = () => {
-  const { GithubSignIn, GoogleSignIn, SignIn, user } = useContext(AuthProvider);
-  console.log(user);
+  const { GithubSignIn, GoogleSignIn, SignIn } = useContext(AuthProvider);
+  const navigate = useNavigate();
+  const loaction = useLocation();
+
+  const from = loaction.state?.from?.pathname || "/";
 
   const googleSignIn = () => {
-    GoogleSignIn().then((result) => {});
+    GoogleSignIn().then((result) => {
+      navigate(from, { replace: true });
+    });
   };
 
   const githubSignIn = () => {
-    GithubSignIn().then((result) => {});
+    GithubSignIn().then((result) => {
+      navigate(from, { replace: true });
+    });
   };
 
   const formSubmit = (event) => {
@@ -20,8 +27,10 @@ const Login = () => {
     const password = event.target.password.value;
     SignIn(email, password)
       .then((result) => {
-        event.target.reset();
         toast.success(`Succesfully Sign In`);
+        event.target.reset();
+        console.log(from);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);

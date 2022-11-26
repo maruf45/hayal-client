@@ -4,12 +4,10 @@ import { AuthProvider } from "../../AuthContext/AuthContext";
 import Loader from "../Loader/Loader";
 
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useContext(AuthProvider);
+  const { user, loader } = useContext(AuthProvider);
   const location = useLocation();
-  console.log(loading);
-  if (loading) {
-    console.log("laoding is ", loading);
-    return <p>Hello loading</p>;
+  if (true) {
+    return <Loader />;
   }
   if (user && user?.uid) {
     return children;

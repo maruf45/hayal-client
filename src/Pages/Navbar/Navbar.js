@@ -7,17 +7,20 @@ import logo from "../../logo.png";
 import { AuthProvider } from "../../AuthContext/AuthContext";
 
 const Navbar = () => {
-  const {SignOut, user } =
-    useContext(AuthProvider);
+  const { SignOut, user } = useContext(AuthProvider);
   const signOut = () => {
     SignOut().then((result) => {});
   };
   const navigation = [
     { name: "Home", path: "/" },
-    { name: "Features", path: "/feature" },
-    { name: "Marketplace", path: "/feature" },
+    { name: "Cars", path: "/cars" },
     { name: "Blogs", path: "/blogs" },
   ];
+  if(user?.uid){
+    const dashboard= { name: "Dashboard", path: "/dashboard" }
+    navigation.push(dashboard);
+  }
+  console.log(navigation)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <>
@@ -99,13 +102,13 @@ const Navbar = () => {
                   <div className="-my-6 divide-y divide-gray-500/10">
                     <div className="space-y-2 py-6">
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
-                          href={item.href}
+                          to={item.href}
                           className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10"
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                     <div className="py-6">

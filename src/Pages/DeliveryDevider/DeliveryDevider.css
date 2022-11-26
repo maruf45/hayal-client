@@ -1,0 +1,9 @@
+.delivery{
+    margin: 220px 0;
+    background: linear-gradient(45deg, rgba(27,31,34,0.52) 0%, rgba(25,27,30,0.68) 43%, rgba(25, 27, 30, 0.342) 80%, rgba(25, 27, 30, 0.37) 99%),url('https://creativelayers.net/themes/voiture-html/images/background/1.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    padding: 0 120px;
+    height: 80vh;
+}

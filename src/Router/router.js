@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import NotFound from "../Components/404Page/NotFound";
 import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import MyOrders from "../Pages/Dashboard/MyOrders";
@@ -30,4 +31,5 @@ export const router = createBrowserRouter([
     ),
     children: [{ path: "/dashboard", element: <MyOrders /> }],
   },
+  {path:'*', element: <NotFound/>}
 ]);

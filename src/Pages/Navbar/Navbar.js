@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../logo.png";
+import { AuthProvider } from "../../AuthContext/AuthContext";
 
 const Navbar = () => {
+  const {SignOut, user } =
+    useContext(AuthProvider);
+  const signOut = () => {
+    SignOut().then((result) => {});
+  };
   const navigation = [
     { name: "Home", path: "/" },
     { name: "Features", path: "/feature" },
@@ -50,12 +56,21 @@ const Navbar = () => {
                 ))}
               </div>
               <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
-                <Link
-                  to="/login"
-                  className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
-                >
-                  Log in
-                </Link>
+                {user?.uid ? (
+                  <Link
+                    className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                    onClick={signOut}
+                  >
+                    Log Out
+                  </Link>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                  >
+                    Log in
+                  </Link>
+                )}
               </div>
             </nav>
             <Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -94,12 +109,21 @@ const Navbar = () => {
                       ))}
                     </div>
                     <div className="py-6">
-                      <Link
-                        to="/login"
-                        className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
-                      >
-                        Log in
-                      </Link>
+                      {user?.uid ? (
+                        <button
+                          className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                          onClick={signOut}
+                        >
+                          Log Out
+                        </button>
+                      ) : (
+                        <Link
+                          to="/login"
+                          className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                        >
+                          Log in
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>

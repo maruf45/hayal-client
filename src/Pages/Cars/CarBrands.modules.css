@@ -1,0 +1,19 @@
+.carsBrands-container li .active::before {
+  content: "";
+  width: 0;
+}
+.carsBrands-container {
+  background-color: #eef2f6;
+  padding: 10px 40px;
+}
+.carsBrands-container li a{
+  padding: 7px 27px;
+
+}
+.carsBrands-container li .active {
+  background-color: #ffffff;
+  margin: 5px 3px;
+  padding: 7px 27px;
+  border-radius: 9999px;
+  font-weight: 500;
+}

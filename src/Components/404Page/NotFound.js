@@ -5,7 +5,7 @@ const NotFound = () => {
   return (
     <>
       <div className="h-screen  justify-center">
-        <center className="my-auto mt-20   mx-auto">
+        <center className="my-auto mt-20 mx-auto">
           <svg
             className="emoji-404 "
             enableBackground="new 0 0 226 249.135"

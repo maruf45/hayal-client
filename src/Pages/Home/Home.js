@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CarsCollection from "../Cars/CarsCollection";
 import DeliveryDevider from "../DeliveryDevider/DeliveryDevider";
 import './Home.css'
 const Home = () => {
@@ -39,8 +40,10 @@ const Home = () => {
           </div>
         </div>
       </main>           
+      <CarsCollection/>
       {/* Deliver divider  */}
       <DeliveryDevider/>
+
     </>
   );
 };

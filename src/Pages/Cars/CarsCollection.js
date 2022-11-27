@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import CarCategoriesCart from "./CarCategoriesCart";
-import CarsBrands from "./CarsBrands";
 import axios from "axios";
 
 const CarsCollection = () => {

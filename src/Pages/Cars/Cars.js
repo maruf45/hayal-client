@@ -1,13 +1,12 @@
 import React from 'react';
 import CarsBrands from './CarsBrands';
 
-const CarsCollection = () => {
+const Cars = () => {
     return (
         <>
-         <CarsBrands/>   
-         
+          <CarsBrands/>  
         </>
     );
 };
 
-export default CarsCollection;
+export default Cars;

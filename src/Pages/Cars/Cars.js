@@ -5,12 +5,12 @@ import CarsCart from "./CarsCart";
 
 const Cars = () => {
   const cars = useLoaderData();
-  const [carsInfo, setCarsInfo] = useState({});
+  const [carsInfo, setCarsInfo] = useState(null);
 
   return (
     <>
       <CarsCart cars={cars} setCarsInfo={setCarsInfo} />;
-      <CarModal car={cars} carsInfo={carsInfo} />
+      {carsInfo && <CarModal car={cars} carsInfo={carsInfo} setCarsInfo={setCarsInfo} />}
     </>
   );
 };

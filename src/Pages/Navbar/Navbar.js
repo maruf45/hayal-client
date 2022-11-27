@@ -13,7 +13,6 @@ const Navbar = () => {
   };
   const navigation = [
     { name: "Home", path: "/" },
-    { name: "Cars", path: "/cars" },
     { name: "Blogs", path: "/blogs" },
   ];
   if (user?.uid) {

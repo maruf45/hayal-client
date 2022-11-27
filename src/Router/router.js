@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import NotFound from "../Components/404Page/NotFound";
 import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
+import Cars from "../Pages/Cars/Cars";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import MyOrders from "../Pages/Dashboard/MyOrders";
 import ForgotPassword from "../Pages/ForgotPassword/ForgotPassword";
@@ -20,6 +21,16 @@ export const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/forgot-password", element: <ForgotPassword /> },
       { path: "/reset-password", element: <ResetPassword /> },
+      {
+        path: "/cars/:brandName",
+        element: (
+          <PrivateRoute>
+            <Cars />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/usedCars/${params.brandName}`),
+      },
     ],
   },
   {
@@ -31,5 +42,5 @@ export const router = createBrowserRouter([
     ),
     children: [{ path: "/dashboard", element: <MyOrders /> }],
   },
-  {path:'*', element: <NotFound/>}
+  { path: "*", element: <NotFound /> },
 ]);

@@ -10,7 +10,7 @@ const CarCategoriesCart = ({ carsBrands }) => {
       <div className="flex justify-center mt-[40px] flex-wrap  gap-5">
         {carsBrands.map((cars) => {
           return (
-            <>
+            <React.Fragment key={cars._id}>
               <div className="card h-[300px] bg-base-100 shadow-xl image-full">
                 <figure>
                   <img src={cars.BrandImg} alt="Shoes" />
@@ -28,7 +28,7 @@ const CarCategoriesCart = ({ carsBrands }) => {
                   </div>
                 </div>
               </div>
-            </>
+            </React.Fragment>
           );
         })}
       </div>

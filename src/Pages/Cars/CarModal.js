@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AuthProvider } from "../../AuthContext/AuthContext";
-
+import { toast } from "react-toastify";
 const CarModal = ({ carsInfo, setCarsInfo }) => {
   const { user } = useContext(AuthProvider);
 
@@ -10,6 +10,7 @@ const CarModal = ({ carsInfo, setCarsInfo }) => {
     const name = form.name.value;
     const email = form.email.value;
     const carName = form.carName.value;
+    const carImg = carsInfo.carImg;
     const carPrice = form.carPrice.value;
     const mettingLocation = form.location.value;
     const phoneNumber = form.phoneNumber.value;
@@ -17,6 +18,7 @@ const CarModal = ({ carsInfo, setCarsInfo }) => {
       name,
       email,
       carName,
+      carImg,
       carPrice,
       mettingLocation,
       phoneNumber,
@@ -27,8 +29,17 @@ const CarModal = ({ carsInfo, setCarsInfo }) => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(bookObj)
-    });
+      body: JSON.stringify(bookObj),
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.acknowledged){
+        toast.success(`${carName} is Booked`);
+      }
+    })
+    .catch(error =>{
+      toast.error(error?.message);
+    })
     setCarsInfo(null);
   };
 

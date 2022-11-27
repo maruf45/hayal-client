@@ -6,14 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import AuthContext from "./AuthContext/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthContext>
-      <App />
-      <ToastContainer />
-    </AuthContext>
+    <QueryClientProvider client={queryClient}>
+      <AuthContext>
+        <App />
+        <ToastContainer />
+      </AuthContext>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

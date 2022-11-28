@@ -1,14 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthProvider } from "../../AuthContext/AuthContext";
 import { toast } from "react-toastify";
+import useToken from "../../Hooks/useToken";
 const Login = () => {
   const { GithubSignIn, GoogleSignIn, SignIn } = useContext(AuthProvider);
+  const [loggedUserEmail, setLogged] = useState();
+  const [token] = useToken(loggedUserEmail);
   const navigate = useNavigate();
   const loaction = useLocation();
 
   const from = loaction.state?.from?.pathname || "/";
-
+  if (token) {
+    navigate(from, { replace: true });
+  }
   const googleSignIn = () => {
     GoogleSignIn().then((result) => {
       navigate(from, { replace: true });
@@ -29,13 +34,22 @@ const Login = () => {
       .then((result) => {
         toast.success(`Succesfully Sign In`);
         event.target.reset();
-        console.log(from);
-        navigate(from, { replace: true });
+        setLogged(email);
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
+
+  const seller = (event) => {
+    const seller = event.target.value;
+    console.log(seller);
+  };
+  const buyer = (event) => {
+    const buyer = event.target.value;
+    console.log(buyer);
+  };
+
   return (
     <div className="h-screen">
       <div className=" h-max w-full max-w-sm mx-auto mt-20 p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -107,7 +121,9 @@ const Login = () => {
                   name="radio"
                   id="buyer"
                   className="radio"
-                  checked
+                  required
+                  onChange={buyer}
+                  value={"buyer"}
                 />
                 <label
                   htmlFor="buyer"
@@ -121,7 +137,10 @@ const Login = () => {
                   type="radio"
                   name="radio"
                   id="seller"
+                  required
                   className="radio"
+                  onChange={seller}
+                  value={"seller"}
                 />
                 <label
                   htmlFor="seller"

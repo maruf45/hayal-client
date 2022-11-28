@@ -11,7 +11,11 @@ const MyOrders = () => {
   } = useQuery({
     queryKey: ["myOrdersData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/userOrders?email=${user?.email}`)
+      fetch(`http://localhost:5000/userOrders?email=${user?.email}`,{
+        headers:{
+          authorization: `bearar ${localStorage.getItem('token')}`
+        }
+      })
         .then((res) => res.json())
         .then((data) => {
           return data;
@@ -35,7 +39,7 @@ const MyOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {myOrderData.map((orderData, index) => {
+            {myOrderData?.map((orderData, index) => {
               return (
                 <React.Fragment key={orderData._id}>
                   <tr>

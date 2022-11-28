@@ -19,7 +19,6 @@ const Navbar = () => {
     const dashboard = { name: "Dashboard", path: "/dashboard" };
     navigation.push(dashboard);
   }
-  console.log(navigation);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <>
@@ -30,12 +29,12 @@ const Navbar = () => {
               className="flex pb-3 items-center justify-between"
               aria-label="Global"
             >
-                <div className="flex lg:hidden">
+              <div className="flex lg:hidden">
                 <label
                   htmlFor="dashboardDrawer"
                   className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
                 >
-                  <Bars3Icon className="h-6 w-6"  />
+                  <Bars3Icon className="h-6 w-6" />
                 </label>
               </div>
               <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">

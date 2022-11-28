@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Components/Loader/Loader";
 import { toast } from "react-toastify";
+import { AuthProvider } from "../../AuthContext/AuthContext";
 
 
 const AddProduct = () => {
-  
+  const {user} = useContext(AuthProvider)
     const {
         data: carCategories = [],
         isLoading,
@@ -35,7 +36,7 @@ const AddProduct = () => {
     const currentPrice = form.currentPrice.value;
     const useTime = form.useTime.value;
     const location = form.location.value;
-    const sellerName = form.seller.value;
+    const selerName = form.seller.value;
     console.log(carImage)
     const url = `https://api.imgbb.com/1/upload?key=8b6bad17ccb6b5cdfff9af4bad6b37b6`;
     const formData = new FormData();
@@ -51,7 +52,7 @@ const AddProduct = () => {
             const carImg = data.data.url;
             const carObj = {
                 carName,
-                sellerName,
+                selerName,
                 carBrand,
                 carInfo,
                 oldPrice,
@@ -60,6 +61,7 @@ const AddProduct = () => {
                 location,
                 carImg,
                 uploadDate,
+                email: user.email
               };
             fetch("http://localhost:5000/userdCars", {
               method: "POST",
@@ -213,7 +215,7 @@ const AddProduct = () => {
               id="years"
               name="useTime"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Current Price"
+              placeholder="Years Of use"
               required
             />
           </div>
@@ -234,7 +236,23 @@ const AddProduct = () => {
             required
           />
         </div>
-
+        <div className="mb-6">
+          <label
+            htmlFor="seller"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Seller Email
+          </label>
+          <input
+            type="text"
+            id="seller"
+            name="seller"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            defaultValue={user.email}
+            disabled
+            required
+          />
+        </div>
         <div className="flex items-center justify-center w-full mb-4">
           <label
             htmlFor="dropzone-file"

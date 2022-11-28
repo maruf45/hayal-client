@@ -10,9 +10,9 @@ const Login = () => {
   console.log(userType);
   const [token] = useToken(loggedUserEmail);
   const navigate = useNavigate();
-  const loaction = useLocation();
+  const location = useLocation();
 
-  const from = loaction.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
   if (token) {
     navigate(from, { replace: true });
   }
@@ -45,6 +45,7 @@ const Login = () => {
           })
             .then((res) => res.json())
             .then((data) => {
+              console.log(data)
               if (data.modifiedCount > 0) {
                 toast.success("You are now Seller");
               }

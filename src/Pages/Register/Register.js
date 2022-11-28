@@ -7,11 +7,13 @@ import useToken from "../../Hooks/useToken";
 const Register = () => {
   const { RegisterUser, UpdateProfile, GoogleSignIn, GithubSignIn } =
     useContext(AuthProvider);
-  const [registerEmail, setRegesiterEmail] = useState();
-  const [token] = useToken(registerEmail);
+  const [userEmail, setUserEmail] = useState("");
+  const [token] = useToken(userEmail);
+  console.log(userEmail);
+
   const navigate = useNavigate();
-  const loaction = useLocation();
-  const from = loaction.state?.from?.pathname || "/";
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   if (token) {
     navigate(from, { replace: true });
   }
@@ -35,11 +37,8 @@ const Register = () => {
 
     RegisterUser(email, password)
       .then((result) => {
-        updateProfile(name);
-        userInfo(name, email);
+        updateProfile(name, email);
         toast.success(`${name} Succesfully Register`);
-        event.target.reset();
-        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);
@@ -54,15 +53,22 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setRegesiterEmail(email);
+        if (data.acknowledged) {
+          setUserEmail(email);
+
+          console.log("register page", email);
+          console.log("regitste state", userEmail);
+        }
       });
   };
 
-  const updateProfile = (name) => {
+  const updateProfile = (name, email) => {
     const profile = {
       displayName: name,
     };
-    UpdateProfile(profile).then((data) => {});
+    UpdateProfile(profile).then((data) => {
+      userInfo(name, email);
+    });
   };
   return (
     <div className="h-screen">

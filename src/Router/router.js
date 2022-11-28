@@ -2,8 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import NotFound from "../Components/404Page/NotFound";
 import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
 import Cars from "../Pages/Cars/Cars";
+import AddProduct from "../Pages/Dashboard/AddProduct";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import MyOrders from "../Pages/Dashboard/MyOrders";
+import MyProduct from "../Pages/Dashboard/MyProduct";
 import ForgotPassword from "../Pages/ForgotPassword/ForgotPassword";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -40,7 +42,14 @@ export const router = createBrowserRouter([
         <Dashboard />
       </PrivateRoute>
     ),
-    children: [{ path: "/dashboard", element: <MyOrders /> }],
+    children: [
+      { path: "/dashboard/myOrders", element: <MyOrders /> },
+      {
+        path: "/dashboard/myProduct",
+        element: <MyProduct />
+      },
+      { path: "/dashboard/addProduct", element: <AddProduct /> },
+    ],
   },
   { path: "*", element: <NotFound /> },
 ]);

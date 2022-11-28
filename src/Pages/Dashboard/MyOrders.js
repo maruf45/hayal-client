@@ -5,7 +5,7 @@ import { AuthProvider } from "../../AuthContext/AuthContext";
 const MyOrders = () => {
   const {user} = useContext(AuthProvider);
   const {
-    data: myOrderData = [],
+    data: myOrdersData = [],
     isLoading,
     refetch,
   } = useQuery({
@@ -13,7 +13,7 @@ const MyOrders = () => {
     queryFn: () =>
       fetch(`http://localhost:5000/userOrders?email=${user?.email}`,{
         headers:{
-          authorization: `bearar ${localStorage.getItem('token')}`
+          authorization: `bearer ${localStorage.getItem('token')}`
         }
       })
         .then((res) => res.json())
@@ -22,6 +22,7 @@ const MyOrders = () => {
         }),
   });
   refetch();
+
   if (isLoading) {
     return <Loader />;
   }
@@ -39,9 +40,9 @@ const MyOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {myOrderData?.map((orderData, index) => {
+            {myOrdersData?.map((orderData, index) => {
               return (
-                <React.Fragment key={orderData._id}>
+                <React.Fragment key={orderData?._id}>
                   <tr>
                     <th>
                       <label>{index + 1}</label>

@@ -5,7 +5,9 @@ import { toast } from "react-toastify";
 import useToken from "../../Hooks/useToken";
 const Login = () => {
   const { GithubSignIn, GoogleSignIn, SignIn } = useContext(AuthProvider);
-  const [loggedUserEmail, setLogged] = useState();
+  const [loggedUserEmail, setLogged] = useState("");
+  const [userType, setUserType] = useState("buyer");
+  console.log(userType);
   const [token] = useToken(loggedUserEmail);
   const navigate = useNavigate();
   const loaction = useLocation();
@@ -16,13 +18,15 @@ const Login = () => {
   }
   const googleSignIn = () => {
     GoogleSignIn().then((result) => {
-      navigate(from, { replace: true });
+      const email = result.email;
+      setLogged(email);
     });
   };
 
   const githubSignIn = () => {
     GithubSignIn().then((result) => {
-      navigate(from, { replace: true });
+      const email = result.email;
+      setLogged(email);
     });
   };
 
@@ -35,6 +39,17 @@ const Login = () => {
         toast.success(`Succesfully Sign In`);
         event.target.reset();
         setLogged(email);
+        if (userType === "seller") {
+          fetch(`http://localhost:5000/user/seller?userType=${userType}&email=${email}`, {
+            method: "PUT",
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.modifiedCount > 0) {
+                toast.success("You are now Seller");
+              }
+            });
+        }
       })
       .catch((error) => {
         toast.error(error.message);
@@ -43,11 +58,11 @@ const Login = () => {
 
   const seller = (event) => {
     const seller = event.target.value;
-    console.log(seller);
+    setUserType(seller);
   };
   const buyer = (event) => {
     const buyer = event.target.value;
-    console.log(buyer);
+    setUserType(buyer);
   };
 
   return (

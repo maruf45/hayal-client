@@ -18,6 +18,39 @@ const Login = () => {
   const googleSignIn = () => {
     GoogleSignIn().then((result) => {
       const email = result.email;
+      if (userType === "seller") {
+        fetch(
+          `http://localhost:5000/user/seller?userType=${userType}&email=${email}`,
+
+          {
+            method: "PUT",
+            headers: {
+              authorization: `bearer ${localStorage.getItem(token)}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.modifiedCount > 0) {
+              toast.success("You are now Seller");
+            }
+          });
+      } else {
+        fetch(
+          `http://localhost:5000/user/seller?userType=${userType}&email=${email}`,
+          {
+            method: "PUT",
+            headers: {
+              authorization: `bearer ${localStorage.getItem(token)}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+      }
       setLogged(email);
     });
   };
@@ -25,6 +58,39 @@ const Login = () => {
   const githubSignIn = () => {
     GithubSignIn().then((result) => {
       const email = result.email;
+      if (userType === "seller") {
+        fetch(
+          `http://localhost:5000/user/seller?userType=${userType}&email=${email}`,
+
+          {
+            method: "PUT",
+            headers: {
+              authorization: `bearer ${localStorage.getItem(token)}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.modifiedCount > 0) {
+              toast.success("You are now Seller");
+            }
+          });
+      } else {
+        fetch(
+          `http://localhost:5000/user/seller?userType=${userType}&email=${email}`,
+          {
+            method: "PUT",
+            headers: {
+              authorization: `bearer ${localStorage.getItem(token)}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+      }
       setLogged(email);
     });
   };
@@ -39,15 +105,36 @@ const Login = () => {
         event.target.reset();
         setLogged(email);
         if (userType === "seller") {
-          fetch(`http://localhost:5000/user/seller?userType=${userType}&email=${email}`, {
-            method: "PUT",
-          })
+          fetch(
+            `http://localhost:5000/user/seller?userType=${userType}&email=${email}`,
+
+            {
+              method: "PUT",
+              headers: {
+                authorization: `bearer ${localStorage.getItem(token)}`,
+              },
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
-              console.log(data)
+              console.log(data);
               if (data.modifiedCount > 0) {
                 toast.success("You are now Seller");
               }
+            });
+        } else {
+          fetch(
+            `http://localhost:5000/user/seller?userType=${userType}&email=${email}`,
+            {
+              method: "PUT",
+              headers: {
+                authorization: `bearer ${localStorage.getItem(token)}`,
+              },
+            }
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
             });
         }
       })

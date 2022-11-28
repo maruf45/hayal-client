@@ -20,7 +20,7 @@ const Login = () => {
       const email = result.email;
       if (userType === "seller") {
         fetch(
-          `http://localhost:5000/user/seller?userType=${userType}&email=${email}`,
+          `https://backend-alpha-six.vercel.app/user/seller?userType=${userType}&email=${email}`,
 
           {
             method: "PUT",
@@ -38,7 +38,7 @@ const Login = () => {
           });
       } else {
         fetch(
-          `http://localhost:5000/user/seller?userType=${userType}&email=${email}`,
+          `https://backend-alpha-six.vercel.app/user/seller?userType=${userType}&email=${email}`,
           {
             method: "PUT",
             headers: {
@@ -60,7 +60,7 @@ const Login = () => {
       const email = result.email;
       if (userType === "seller") {
         fetch(
-          `http://localhost:5000/user/seller?userType=${userType}&email=${email}`,
+          `https://backend-alpha-six.vercel.app/user/seller?userType=${userType}&email=${email}`,
 
           {
             method: "PUT",
@@ -78,7 +78,7 @@ const Login = () => {
           });
       } else {
         fetch(
-          `http://localhost:5000/user/seller?userType=${userType}&email=${email}`,
+          `https://backend-alpha-six.vercel.app/user/seller?userType=${userType}&email=${email}`,
           {
             method: "PUT",
             headers: {
@@ -106,7 +106,7 @@ const Login = () => {
         setLogged(email);
         if (userType === "seller") {
           fetch(
-            `http://localhost:5000/user/seller?userType=${userType}&email=${email}`,
+            `https://backend-alpha-six.vercel.app/user/seller?userType=${userType}&email=${email}`,
 
             {
               method: "PUT",
@@ -124,7 +124,7 @@ const Login = () => {
             });
         } else {
           fetch(
-            `http://localhost:5000/user/seller?userType=${userType}&email=${email}`,
+            `https://backend-alpha-six.vercel.app/user/seller?userType=${userType}&email=${email}`,
             {
               method: "PUT",
               headers: {

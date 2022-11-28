@@ -14,7 +14,7 @@ const AddProduct = () => {
       } = useQuery({
         queryKey: ["carCategories"],
         queryFn: () =>
-          fetch('http://localhost:5000/carCategories')
+          fetch('https://backend-alpha-six.vercel.app/carCategories')
             .then((res) => res.json())
             .then((data) => {
               return data;
@@ -63,7 +63,7 @@ const AddProduct = () => {
                 uploadDate,
                 email: user.email
               };
-            fetch("http://localhost:5000/userdCars", {
+            fetch("https://backend-alpha-six.vercel.app/userdCars", {
               method: "POST",
               headers: {
                 "content-type": "application/json",

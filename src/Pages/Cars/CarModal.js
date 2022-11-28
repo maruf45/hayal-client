@@ -23,7 +23,7 @@ const CarModal = ({ carsInfo, setCarsInfo }) => {
       mettingLocation,
       phoneNumber,
     };
-    fetch("http://localhost:5000/userOrders", {
+    fetch("https://backend-alpha-six.vercel.app/userOrders", {
       method: "POST",
 
       headers: {

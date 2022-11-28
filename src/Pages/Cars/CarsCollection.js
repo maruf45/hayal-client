@@ -6,7 +6,7 @@ const CarsCollection = () => {
   const [carsBrands, setCarBrands] = useState([]);
   useEffect(() => {
     const fetchCars = async () => {
-      const res = await axios.get("http://localhost:5000/carCategories");
+      const res = await axios.get("https://backend-alpha-six.vercel.app/carCategories");
       setCarBrands(res.data);
     };
     fetchCars();

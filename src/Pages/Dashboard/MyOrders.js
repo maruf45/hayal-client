@@ -11,7 +11,7 @@ const MyOrders = () => {
   } = useQuery({
     queryKey: ["myOrdersData"],
     queryFn: () =>
-      fetch(`http://localhost:5000/userOrders?email=${user?.email}`,{
+      fetch(`https://backend-alpha-six.vercel.app/userOrders?email=${user?.email}`,{
         headers:{
           authorization: `bearer ${localStorage.getItem('token')}`
         }

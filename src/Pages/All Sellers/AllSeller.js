@@ -11,7 +11,7 @@ const AllSeller = () => {
   } = useQuery({
     queryKey: ["allSeller"],
     queryFn: () =>
-      fetch(`http://localhost:5000/allUser?userType=seller`, {
+      fetch(`https://backend-alpha-six.vercel.app/allUser?userType=seller`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("token")}`,
         },
@@ -22,7 +22,7 @@ const AllSeller = () => {
         }),
   });
   const handelDelete = (email) => {
-    fetch(`http://localhost:5000/allUser?userType=buyer&email=${email}`, {
+    fetch(`https://backend-alpha-six.vercel.app/allUser?userType=buyer&email=${email}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("token")}`,

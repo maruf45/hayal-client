@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/forgot-password", element: <ForgotPassword /> },
       { path: "/reset-password", element: <ResetPassword /> },
-      {path: '/blogs', element: <Blogs/>, loader: () => fetch('http://localhost:5000/blogs')},
+      {path: '/blogs', element: <Blogs/>, loader: () => fetch('https://backend-alpha-six.vercel.app/blogs')},
       {
         path: "/cars/:brandName",
         element: (
@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/usedCars/${params.brandName}`),
+          fetch(`https://backend-alpha-six.vercel.app/usedCars/${params.brandName}`),
       },
     ],
   },

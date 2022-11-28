@@ -5,6 +5,7 @@ import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
 import SellerRoute from "../Components/PrivateRoute/SellerRoute";
 import AllSeller from "../Pages/All Sellers/AllSeller";
 import AllBuyers from "../Pages/AllBuyers/AllBuyers";
+import Blogs from "../Pages/Blogs/Blogs";
 import Cars from "../Pages/Cars/Cars";
 import AddProduct from "../Pages/Dashboard/AddProduct";
 import Dashboard from "../Pages/Dashboard/Dashboard";
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/forgot-password", element: <ForgotPassword /> },
       { path: "/reset-password", element: <ResetPassword /> },
+      {path: '/blogs', element: <Blogs/>, loader: () => fetch('http://localhost:5000/blogs')},
       {
         path: "/cars/:brandName",
         element: (

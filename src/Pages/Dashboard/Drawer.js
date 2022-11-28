@@ -47,9 +47,7 @@ const Drawer = () => {
                 </li>
               </>
             ) : (
-              <li>
-                <Link to={"/dashboard/myOrders"}>My Orders</Link>
-              </li>
+              <></>
             )}
           </ul>
         </div>

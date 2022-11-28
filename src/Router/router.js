@@ -1,6 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import NotFound from "../Components/404Page/NotFound";
+import AdminRoute from "../Components/PrivateRoute/AdminRoute";
 import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
+import SellerRoute from "../Components/PrivateRoute/SellerRoute";
+import AllSeller from "../Pages/All Sellers/AllSeller";
+import AllBuyers from "../Pages/AllBuyers/AllBuyers";
 import Cars from "../Pages/Cars/Cars";
 import AddProduct from "../Pages/Dashboard/AddProduct";
 import Dashboard from "../Pages/Dashboard/Dashboard";
@@ -46,9 +50,36 @@ export const router = createBrowserRouter([
       { path: "/dashboard/myOrders", element: <MyOrders /> },
       {
         path: "/dashboard/myProduct",
-        element: <MyProduct />
+        element: (
+          <SellerRoute>
+            <MyProduct />
+          </SellerRoute>
+        ),
       },
-      { path: "/dashboard/addProduct", element: <AddProduct /> },
+      {
+        path: "/dashboard/addProduct",
+        element: (
+          <SellerRoute>
+            <AddProduct />
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allBuyer",
+        element: (
+          <AdminRoute>
+            <AllBuyers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allSeller",
+        element: (
+          <AdminRoute>
+            <AllSeller />
+          </AdminRoute>
+        ),
+      },
     ],
   },
   { path: "*", element: <NotFound /> },

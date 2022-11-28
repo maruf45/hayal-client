@@ -7,7 +7,6 @@ const Login = () => {
   const { GithubSignIn, GoogleSignIn, SignIn } = useContext(AuthProvider);
   const [loggedUserEmail, setLogged] = useState("");
   const [userType, setUserType] = useState("buyer");
-  console.log(userType);
   const [token] = useToken(loggedUserEmail);
   const navigate = useNavigate();
   const location = useLocation();
@@ -137,7 +136,6 @@ const Login = () => {
                   name="radio"
                   id="buyer"
                   className="radio"
-                  required
                   onChange={buyer}
                   value={"buyer"}
                 />
@@ -153,7 +151,6 @@ const Login = () => {
                   type="radio"
                   name="radio"
                   id="seller"
-                  required
                   className="radio"
                   onChange={seller}
                   value={"seller"}
